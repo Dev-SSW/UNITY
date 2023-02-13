@@ -150,6 +150,20 @@ public class StatusController : MonoBehaviour
         else
             currenthp = hp;
     }
+    public void IncreaseSP(int _count)
+    {
+        if (currentsp + _count < sp)
+            currentsp += _count;
+        else
+            currentsp = sp;
+    }
+    public void IncreaseSatisfy(int _count)
+    {
+        if (currentsatisfy + _count < satisfy)
+            currentsatisfy += _count;
+        else
+            currentsp = sp;
+    }
     public void DecreaseHP(int _count)
     {
         if(currentdp > 0)

@@ -7,8 +7,8 @@ using Unity.VisualScripting;
 
 public class Slot : MonoBehaviour , IPointerClickHandler , IBeginDragHandler ,IDragHandler ,IEndDragHandler ,IDropHandler
 {
-    
 
+    private ItemEffectDataBase theItemEffectDataBase;
     public Item item; //획득한 아이템
     public int itemCount; //획득한 아이템의 개수
     public Image itemImage; //아이템 이미지
@@ -22,7 +22,8 @@ public class Slot : MonoBehaviour , IPointerClickHandler , IBeginDragHandler ,ID
     
     void Start()
     {
-        theWeaponManager = FindObjectOfType<WeaponManager>();
+        theItemEffectDataBase = FindObjectOfType<ItemEffectDataBase>();
+        
     }
     
     
@@ -82,16 +83,11 @@ public class Slot : MonoBehaviour , IPointerClickHandler , IBeginDragHandler ,ID
         if(eventData.button == PointerEventData.InputButton.Right)
         {
             if(item != null)
-            {
-                if(item.itemType == Item.ItemType.Equitment) 
+            {    
+                    theItemEffectDataBase.UseItem(item);
+                if (item.itemType == Item.ItemType.Used)
                 {
-                    StartCoroutine(theWeaponManager.ChangeWeaponCoroutine(item.weaponType, item.itemName));
-                }
-                else
-                {
-                    Debug.Log(item.itemName + "을 사용했습니다");
                     SetSlotCount(-1);
-                    
                 }
             }
         }
