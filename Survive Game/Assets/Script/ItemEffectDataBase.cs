@@ -24,7 +24,18 @@ public class ItemEffectDataBase : MonoBehaviour
     private WeaponManager theWeaponManager;
     [SerializeField]
     private StatusController thePlayerStatus;
+    [SerializeField]
+    private SlotToolTip theSlotToolTip;
 
+    public void ShowToolTip(Item _item, Vector3 _pos)
+    {
+        theSlotToolTip.ShowToolTip(_item,_pos);
+    }
+
+    public void HideToolTip()
+    {
+        theSlotToolTip.HideToolTip();
+    }
     public void UseItem(Item _item)
     {
         if (_item.itemType == Item.ItemType.Equitment)

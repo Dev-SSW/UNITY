@@ -6,6 +6,8 @@ using UnityEngine;
 public class Item : ScriptableObject // 모노에이블이 아닌 스크립티블 오브젝트 (오브젝트에 따로 붙일 필요가 없음)
 {
     public string itemName;  //아이템 이름
+    [TextArea]
+    public string itemDesc;   //아이템의 설명
     public ItemType itemType; //아이템의 유형
     public Sprite itemImage; //아이템 이미지
     public GameObject itemPrefab; //아이템의 프리팹 (아이템이 떨궈졌을 때 실체)

@@ -63,6 +63,7 @@
     <Compile Include="Assets\Script\UI Script\Inventory.cs" />
     <Compile Include="Assets\Script\ItemEffectDataBase.cs" />
     <Compile Include="Assets\Script\SoundManager.cs" />
+    <Compile Include="Assets\Script\UI Script\SlotToolTip.cs" />
     <Compile Include="Assets\Script\GunController.cs" />
     <Compile Include="Assets\Script\WeaponSway.cs" />
     <Compile Include="Assets\Script\WeaponManager.cs" />

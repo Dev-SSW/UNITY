@@ -5,10 +5,10 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Unity.VisualScripting;
 
-public class Slot : MonoBehaviour , IPointerClickHandler , IBeginDragHandler ,IDragHandler ,IEndDragHandler ,IDropHandler
+public class Slot : MonoBehaviour , IPointerEnterHandler, IPointerExitHandler ,IPointerClickHandler , IBeginDragHandler ,IDragHandler ,IEndDragHandler ,IDropHandler
 {
 
-    private ItemEffectDataBase theItemEffectDataBase;
+    
     public Item item; //획득한 아이템
     public int itemCount; //획득한 아이템의 개수
     public Image itemImage; //아이템 이미지
@@ -19,7 +19,8 @@ public class Slot : MonoBehaviour , IPointerClickHandler , IBeginDragHandler ,ID
     private GameObject go_CountImage; //획득한 아이템이 있을때만 파란색 동그라미를 생성
 
     private WeaponManager theWeaponManager;
-    
+    private ItemEffectDataBase theItemEffectDataBase;
+
     void Start()
     {
         theItemEffectDataBase = FindObjectOfType<ItemEffectDataBase>();
@@ -142,5 +143,19 @@ public class Slot : MonoBehaviour , IPointerClickHandler , IBeginDragHandler ,ID
         {
             DragSlot.instance.dragSlot.ClearSlot();
         }
+    }
+
+    //마우스가 슬롯에 들어갈때
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (item != null)
+        {
+            theItemEffectDataBase.ShowToolTip(item , transform.position);
+        }
+    }
+    //슬롯에서 빠져나갈 때
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        theItemEffectDataBase.HideToolTip();
     }
 }
