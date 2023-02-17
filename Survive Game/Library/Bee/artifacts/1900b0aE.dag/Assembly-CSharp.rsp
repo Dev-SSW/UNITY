@@ -361,6 +361,7 @@
 "Assets/Script/Item.cs"
 "Assets/Script/ItemEffectDataBase.cs"
 "Assets/Script/ItemPickUp.cs"
+"Assets/Script/NPC/Pig.cs"
 "Assets/Script/PickaxeController.cs"
 "Assets/Script/PlayerController.cs"
 "Assets/Script/Rock.cs"
