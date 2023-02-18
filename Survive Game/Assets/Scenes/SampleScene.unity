@@ -483,14 +483,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ec37dffbcf70e6458f9c8a91b4193f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animalName: 
-  hp: 0
-  walkSpeed: 0
-  walkTime: 0
-  waitTime: 0
-  anim: {fileID: 0}
-  rigid: {fileID: 0}
-  boxCol: {fileID: 0}
+  animalName: Pig
+  hp: 2
+  walkSpeed: 5
+  walkTime: 10
+  waitTime: 3
+  anim: {fileID: 766150471}
+  rigid: {fileID: 156516195}
+  boxCol: {fileID: 156516194}
 --- !u!1001 &193107662
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6987,15 +6987,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 594d7a587fd9f914db93e9eb91abbbfd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.341
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 594d7a587fd9f914db93e9eb91abbbfd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.197
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 594d7a587fd9f914db93e9eb91abbbfd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.336
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 594d7a587fd9f914db93e9eb91abbbfd, type: 3}
       propertyPath: m_LocalRotation.w
