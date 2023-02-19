@@ -1,22 +1,27 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Scripting.APIUpdating;
+using Random = UnityEngine.Random;
 
 public class Pig : MonoBehaviour
 {
     [SerializeField] private string animalName; //이름
     [SerializeField] private int hp; // 동물의 체력
     [SerializeField] private float walkSpeed; //걷기 스피드
-
+    [SerializeField] private float runSpeed; // 뛰기 스피드
+    private float applySpeed;
     private Vector3 direction; //방향
 
     //상태변수
     private bool isAction; //행동중인지 아닌지
     private bool isWalking; //걷는지 안 걷는지
+    private bool isRunning; //뛰는지 판별
 
     [SerializeField] private float walkTime; //걷는 시간
     [SerializeField] private float waitTime; //대기 시간, (풀 뜯고 이런거)
+    [SerializeField] private float runTime;
     private float currentTime;
 
     //필요한 컴포넌트
@@ -46,17 +51,17 @@ public class Pig : MonoBehaviour
 
     private void Rotation()
     {
-        if (isWalking)
+        if (isWalking || isRunning)
         {
-            Vector3 _rotation = Vector3.Lerp(transform.eulerAngles, direction, 0.01f);
+            Vector3 _rotation = Vector3.Lerp(transform.eulerAngles, new Vector3 (0f, direction.y ,0f), 0.01f);
             rigid.MoveRotation(Quaternion.Euler(_rotation));
         }
     }
     private void Move()
     {
-        if (isWalking)
+        if (isWalking || isRunning)
         {
-            rigid.MovePosition(transform.position+ (transform.forward * walkSpeed *Time.deltaTime));
+            rigid.MovePosition(transform.position+ (transform.forward * applySpeed *Time.deltaTime));
         }
     }
     private void ElapseTime()
@@ -72,7 +77,10 @@ public class Pig : MonoBehaviour
     {
         isWalking = false;
         isAction = true;
+        isRunning = false;
+        applySpeed = walkSpeed;
         anim.SetBool("Walking", isWalking);
+        anim.SetBool("Running", isRunning);
         direction.Set(0f, Random.Range(0f,360f), 0f);
         RandomAction();
     }
@@ -120,7 +128,29 @@ public class Pig : MonoBehaviour
         isWalking = true;
         anim.SetBool("Walking", isWalking);
         currentTime = walkTime;
-        
+        applySpeed = walkSpeed;
         Debug.Log("걷기");
     }
+    private void Run(Vector3 _targetPos)
+    {
+        direction = Quaternion.LookRotation(transform.position - _targetPos).eulerAngles;
+
+        currentTime = runTime;
+        isWalking = false;
+        isRunning = true;
+        applySpeed = runSpeed;
+        anim.SetBool("Running", isRunning);
+    }
+    public void Damage(int _dmg , Vector3 _targetPos)
+    {
+        hp -= _dmg;
+        if (hp <= 0)
+        {
+            Debug.Log("체력 0이하");
+            return;
+        }
+        anim.SetTrigger("Hurt");
+        Run(_targetPos); 
+    }
+
 }
