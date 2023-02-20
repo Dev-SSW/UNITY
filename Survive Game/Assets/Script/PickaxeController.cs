@@ -33,6 +33,7 @@ public class PickaxeController : CloseWeaponController
                     }
                     else if (hitinfo.transform.tag == "NPC")
                     {
+                        SoundManager.instance.PlaySE("Animal_Hit");
                         hitinfo.transform.GetComponent<Pig>().Damage(1, transform.position);
                     }
                     isSwing = false;

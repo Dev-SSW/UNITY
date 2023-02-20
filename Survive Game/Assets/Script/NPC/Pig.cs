@@ -18,6 +18,7 @@ public class Pig : MonoBehaviour
     private bool isAction; //행동중인지 아닌지
     private bool isWalking; //걷는지 안 걷는지
     private bool isRunning; //뛰는지 판별
+    private bool isDead; //죽었는지 판별
 
     [SerializeField] private float walkTime; //걷는 시간
     [SerializeField] private float waitTime; //대기 시간, (풀 뜯고 이런거)
@@ -28,10 +29,15 @@ public class Pig : MonoBehaviour
     [SerializeField] private Animator anim;
     [SerializeField] private Rigidbody rigid;
     [SerializeField] private BoxCollider boxCol;
+    private AudioSource theAudio;
+    [SerializeField] private AudioClip[] sound_pig_Normal;
+    [SerializeField] private AudioClip sound_pig_Hurt;
+    [SerializeField] private AudioClip sound_pig_Dead;
 
     // Start is called before the first frame update
     void Start()
     {
+        theAudio = GetComponent<AudioSource>();
         currentTime = waitTime;
         isAction = true;
         
@@ -40,13 +46,13 @@ public class Pig : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move();
-        Rotation();
+        if (!isDead)
+        {
+            Move();
+            Rotation();
+            ElapseTime();
+        }
         
-    }
-    private void FixedUpdate()
-    {
-        ElapseTime();
     }
 
     private void Rotation()
@@ -86,6 +92,7 @@ public class Pig : MonoBehaviour
     }
     private void RandomAction()
     {
+        RandomSound();
         int _random = Random.Range(0, 4);
 
         if(_random == 0)
@@ -143,14 +150,37 @@ public class Pig : MonoBehaviour
     }
     public void Damage(int _dmg , Vector3 _targetPos)
     {
-        hp -= _dmg;
-        if (hp <= 0)
+        if (!isDead) 
         {
-            Debug.Log("체력 0이하");
-            return;
+            hp -= _dmg;
+            if (hp <= 0)
+            {
+                Dead();
+                return;
+            }
+            PlaySE(sound_pig_Hurt);
+            anim.SetTrigger("Hurt");
+            Run(_targetPos);
         }
-        anim.SetTrigger("Hurt");
-        Run(_targetPos); 
+
     }
 
+    private void Dead()
+    {
+        PlaySE(sound_pig_Dead);
+        isWalking = false;
+        isRunning = false;
+        isDead = true;
+        anim.SetTrigger("Dead");
+    }
+    private void RandomSound()
+    {
+        int _random = Random.Range(0, 3); // 일상 사운드는 3개
+        PlaySE(sound_pig_Normal[_random]);
+    }
+    private void PlaySE(AudioClip _clip)
+    {
+        theAudio.clip = _clip;
+        theAudio.Play();
+    }
 }
