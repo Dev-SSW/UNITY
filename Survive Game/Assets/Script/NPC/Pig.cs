@@ -5,89 +5,11 @@ using UnityEngine;
 using UnityEngine.Scripting.APIUpdating;
 using Random = UnityEngine.Random;
 
-public class Pig : MonoBehaviour
+public class Pig : WeakAnimal
 {
-    [SerializeField] private string animalName; //이름
-    [SerializeField] private int hp; // 동물의 체력
-    [SerializeField] private float walkSpeed; //걷기 스피드
-    [SerializeField] private float runSpeed; // 뛰기 스피드
-    private float applySpeed;
-    private Vector3 direction; //방향
-
-    //상태변수
-    private bool isAction; //행동중인지 아닌지
-    private bool isWalking; //걷는지 안 걷는지
-    private bool isRunning; //뛰는지 판별
-    private bool isDead; //죽었는지 판별
-
-    [SerializeField] private float walkTime; //걷는 시간
-    [SerializeField] private float waitTime; //대기 시간, (풀 뜯고 이런거)
-    [SerializeField] private float runTime;
-    private float currentTime;
-
-    //필요한 컴포넌트
-    [SerializeField] private Animator anim;
-    [SerializeField] private Rigidbody rigid;
-    [SerializeField] private BoxCollider boxCol;
-    private AudioSource theAudio;
-    [SerializeField] private AudioClip[] sound_pig_Normal;
-    [SerializeField] private AudioClip sound_pig_Hurt;
-    [SerializeField] private AudioClip sound_pig_Dead;
-
-    // Start is called before the first frame update
-    void Start()
+    protected override void ReSet()
     {
-        theAudio = GetComponent<AudioSource>();
-        currentTime = waitTime;
-        isAction = true;
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (!isDead)
-        {
-            Move();
-            Rotation();
-            ElapseTime();
-        }
-        
-    }
-
-    private void Rotation()
-    {
-        if (isWalking || isRunning)
-        {
-            Vector3 _rotation = Vector3.Lerp(transform.eulerAngles, new Vector3 (0f, direction.y ,0f), 0.01f);
-            rigid.MoveRotation(Quaternion.Euler(_rotation));
-        }
-    }
-    private void Move()
-    {
-        if (isWalking || isRunning)
-        {
-            rigid.MovePosition(transform.position+ (transform.forward * applySpeed *Time.deltaTime));
-        }
-    }
-    private void ElapseTime()
-    {
-        currentTime -= Time.deltaTime;
-        if(currentTime <= 0)
-        {
-            //다음 랜덤 행동 개시
-            ReSet();
-        }
-    }
-    private void ReSet()
-    {
-        isWalking = false;
-        isAction = true;
-        isRunning = false;
-        applySpeed = walkSpeed;
-        anim.SetBool("Walking", isWalking);
-        anim.SetBool("Running", isRunning);
-        direction.Set(0f, Random.Range(0f,360f), 0f);
+        base.ReSet();
         RandomAction();
     }
     private void RandomAction()
@@ -95,7 +17,7 @@ public class Pig : MonoBehaviour
         RandomSound();
         int _random = Random.Range(0, 4);
 
-        if(_random == 0)
+        if (_random == 0)
         {
             Wait();
         }
@@ -112,7 +34,7 @@ public class Pig : MonoBehaviour
             TryWalk();
         }
     }
-
+    // Start is called before the first frame update
     private void Wait()
     {
         currentTime = waitTime;
@@ -129,58 +51,5 @@ public class Pig : MonoBehaviour
         currentTime = waitTime;
         anim.SetTrigger("Peek");
         Debug.Log("두리번");
-    }
-    private void TryWalk()
-    {
-        isWalking = true;
-        anim.SetBool("Walking", isWalking);
-        currentTime = walkTime;
-        applySpeed = walkSpeed;
-        Debug.Log("걷기");
-    }
-    private void Run(Vector3 _targetPos)
-    {
-        direction = Quaternion.LookRotation(transform.position - _targetPos).eulerAngles;
-
-        currentTime = runTime;
-        isWalking = false;
-        isRunning = true;
-        applySpeed = runSpeed;
-        anim.SetBool("Running", isRunning);
-    }
-    public void Damage(int _dmg , Vector3 _targetPos)
-    {
-        if (!isDead) 
-        {
-            hp -= _dmg;
-            if (hp <= 0)
-            {
-                Dead();
-                return;
-            }
-            PlaySE(sound_pig_Hurt);
-            anim.SetTrigger("Hurt");
-            Run(_targetPos);
-        }
-
-    }
-
-    private void Dead()
-    {
-        PlaySE(sound_pig_Dead);
-        isWalking = false;
-        isRunning = false;
-        isDead = true;
-        anim.SetTrigger("Dead");
-    }
-    private void RandomSound()
-    {
-        int _random = Random.Range(0, 3); // 일상 사운드는 3개
-        PlaySE(sound_pig_Normal[_random]);
-    }
-    private void PlaySE(AudioClip _clip)
-    {
-        theAudio.clip = _clip;
-        theAudio.Play();
     }
 }

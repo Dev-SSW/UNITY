@@ -67,6 +67,8 @@
     <Compile Include="Assets\Script\UI Script\SlotToolTip.cs" />
     <Compile Include="Assets\Script\GunController.cs" />
     <Compile Include="Assets\Script\WeaponSway.cs" />
+    <Compile Include="Assets\Script\NPC\FieldOfViewAngle.cs" />
+    <Compile Include="Assets\Script\NPC\WeakAnimal.cs" />
     <Compile Include="Assets\Script\WeaponManager.cs" />
     <Compile Include="Assets\Script\Gun.cs" />
     <Compile Include="Assets\Script\Crosshair.cs" />
@@ -79,6 +81,7 @@
     <Compile Include="Assets\Script\Rock.cs" />
     <Compile Include="Assets\Script\UI Script\Slot.cs" />
     <Compile Include="Assets\Script\ActionController.cs" />
+    <Compile Include="Assets\Script\NPC\Animal.cs" />
     <Compile Include="Assets\Script\ItemPickUp.cs" />
   </ItemGroup>
   <ItemGroup>

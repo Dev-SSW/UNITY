@@ -14,7 +14,7 @@ public abstract class CloseWeaponController : MonoBehaviour
     protected bool isSwing = false;
 
     protected RaycastHit hitinfo; //닿았는지 확인하는 변수
-
+    [SerializeField] protected LayerMask layerMask; 
     // Update is called once per frame
     
     protected void TryAttack()
@@ -55,7 +55,7 @@ public abstract class CloseWeaponController : MonoBehaviour
 
     protected bool CheckObject() //맞았는지 확인하는 함수
     {
-        if (Physics.Raycast(transform.position, transform.forward, out hitinfo, currentCloseWeapon.range))
+        if (Physics.Raycast(transform.position, transform.forward, out hitinfo, currentCloseWeapon.range, layerMask))
         {
             return true;
         }

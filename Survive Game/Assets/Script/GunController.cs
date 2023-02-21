@@ -22,6 +22,7 @@ public class GunController : MonoBehaviour
     private AudioSource audioSource;
     //레이저 충돌 정보 받아옴
     private RaycastHit hitinfo;
+    [SerializeField] private LayerMask layerMask;
     //필요한 컴포넌트
     [SerializeField] 
     private Camera theCam; //카메라 시점으로 정가운데에 총알을 맞게 할 것이라 카메라를 만듦.
@@ -110,7 +111,7 @@ public class GunController : MonoBehaviour
             new Vector3(Random.Range(-theCrosshair.GetAccuracy() - currentGun.accuracy , theCrosshair.GetAccuracy() + currentGun.accuracy),
                         Random.Range(-theCrosshair.GetAccuracy() - currentGun.accuracy, theCrosshair.GetAccuracy() + currentGun.accuracy),
                         0)
-            , out hitinfo, currentGun.range)) //position인 이유는 상대적인 좌표가 아닌 절대적인 세계 좌표를 사용해야하기 때문
+            , out hitinfo, currentGun.range,layerMask)) //position인 이유는 상대적인 좌표가 아닌 절대적인 세계 좌표를 사용해야하기 때문
         {   //포인트는 충돌한 곳의 실제 좌표를 알려줌
             GameObject clone = Instantiate(hit_effect_prefab, hitinfo.point, Quaternion.LookRotation(hitinfo.normal)); //var 반환되는 값이 뭔지 모를 때 사용
             Destroy(clone,2f);
