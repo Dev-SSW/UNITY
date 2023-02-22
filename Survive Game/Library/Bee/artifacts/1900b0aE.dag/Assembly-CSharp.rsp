@@ -369,6 +369,7 @@
 "Assets/Script/PlayerController.cs"
 "Assets/Script/Rock.cs"
 "Assets/Script/SoundManager.cs"
+"Assets/Script/UI Script/CraftManual.cs"
 "Assets/Script/UI Script/DragSlot.cs"
 "Assets/Script/UI Script/Inventory.cs"
 "Assets/Script/UI Script/Slot.cs"

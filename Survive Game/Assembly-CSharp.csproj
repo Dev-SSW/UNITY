@@ -83,6 +83,7 @@
     <Compile Include="Assets\Script\ActionController.cs" />
     <Compile Include="Assets\Script\NPC\Animal.cs" />
     <Compile Include="Assets\Script\ItemPickUp.cs" />
+    <Compile Include="Assets\Script\UI Script\CraftManual.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
