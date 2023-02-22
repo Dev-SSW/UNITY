@@ -37,12 +37,12 @@ public class CraftManual : MonoBehaviour
 
 
     public void SlotClick(int _slotNumber)
-    {
+    {     
         go_preview = Instantiate(craft_fire[_slotNumber].go_PreviewPrefab, tf_Player.position + tf_Player.forward, Quaternion.identity);
         go_Prefab = craft_fire[_slotNumber].go_Prefab;
         isPreviewActivated  = true;
         go_BaseUI.SetActive(false); //ΩΩ∑‘√¢ ¿·±Ò ≤Ù±‚
-
+        GameManager.isOpenCraftManual = false;
     }
     
     
@@ -69,7 +69,7 @@ public class CraftManual : MonoBehaviour
     }
     private void Build()
     {
-        if (isPreviewActivated)
+        if (isPreviewActivated && go_preview.GetComponent<PreviewObject>().isBuildable())
         {
             Instantiate(go_Prefab, hitInfo.point,Quaternion.identity);
             Destroy(go_preview);
@@ -103,11 +103,13 @@ public class CraftManual : MonoBehaviour
         isPreviewActivated = false;
         go_preview = null;
         go_BaseUI.SetActive(false);
+        GameManager.isOpenCraftManual = false;
     }
 
     private void Window()
     {
-        if (!isActivated)
+        isActivated = !isActivated;
+        if (isActivated)
         {
             OpenWindow();
         }
@@ -118,12 +120,12 @@ public class CraftManual : MonoBehaviour
     } 
     private void OpenWindow()
     {
-        isActivated = true;
+        GameManager.isOpenCraftManual = true;
         go_BaseUI.SetActive(true);
     }
     private void CloseWindow()
     {
-        isActivated = false;
+        GameManager.isOpenCraftManual = false;     
         go_BaseUI.SetActive(false);
     }
 

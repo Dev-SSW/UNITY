@@ -37,9 +37,6 @@ public class GunController : MonoBehaviour
         originPos = Vector3.zero; //√ ±‚»≠
         audioSource = GetComponent<AudioSource>();
         theCrosshair = FindObjectOfType<Crosshair>();
-
-       
-
     }
     // Update is called once per frame
     

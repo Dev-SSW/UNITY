@@ -19,7 +19,7 @@ public abstract class CloseWeaponController : MonoBehaviour
     
     protected void TryAttack()
     {
-        if (!Inventory.inventoryActivated)
+        if (GameManager.canPlayerMove)
         {
             if (Input.GetButton("Fire1"))
             {
@@ -29,6 +29,10 @@ public abstract class CloseWeaponController : MonoBehaviour
                     StartCoroutine(AttackCoroutine()); //마우스 클릭하자마자 isAttack이 트루가 되어서 한번 클릭하면 다시 누르는걸 막아줌 ( 여러번 공격을 막기 위해)
                 }
             }
+        }
+        else
+        {
+            return;
         }
     }
     IEnumerator AttackCoroutine()
@@ -64,16 +68,17 @@ public abstract class CloseWeaponController : MonoBehaviour
     //가상 함수 = 완성 함수이지만, 추가 편집이 가능한 함수
     public virtual void CloseWeaponChange(CloseWeapon _closehand)
     {
-        if (WeaponManager.currentWeapon != null)
-        {
-            WeaponManager.currentWeapon.gameObject.SetActive(false); //기존의 총을 사라지게 만듦
-        }
-        currentCloseWeapon = _closehand;
-        WeaponManager.currentWeapon = currentCloseWeapon.GetComponent<Transform>();
-        WeaponManager.currentWeaponAnim = currentCloseWeapon.anim;
+        
+            if (WeaponManager.currentWeapon != null)
+            {
+                WeaponManager.currentWeapon.gameObject.SetActive(false); //기존의 총을 사라지게 만듦
+            }
+            currentCloseWeapon = _closehand;
+            WeaponManager.currentWeapon = currentCloseWeapon.GetComponent<Transform>();
+            WeaponManager.currentWeaponAnim = currentCloseWeapon.anim;
 
-        currentCloseWeapon.transform.localPosition = Vector3.zero;
-        currentCloseWeapon.gameObject.SetActive(true);
+            currentCloseWeapon.transform.localPosition = Vector3.zero;
+            currentCloseWeapon.gameObject.SetActive(true);
         
     }
 }
