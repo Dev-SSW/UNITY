@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Assets\Script\CloseWeapon.cs" />
     <Compile Include="Assets\Script\HandController.cs" />
+    <Compile Include="Assets\Script\DayAndNight.cs" />
     <Compile Include="Assets\Script\PreviewObject.cs" />
     <Compile Include="Assets\Script\CloseWeaponController.cs" />
     <Compile Include="Assets\Script\Item.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="Assets\Script\ActionController.cs" />
     <Compile Include="Assets\Script\NPC\Animal.cs" />
     <Compile Include="Assets\Script\ItemPickUp.cs" />
+    <Compile Include="Assets\Script\Water\Water.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

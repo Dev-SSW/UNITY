@@ -21,12 +21,15 @@ public abstract class CloseWeaponController : MonoBehaviour
     {
         if (GameManager.canPlayerMove)
         {
-            if (Input.GetButton("Fire1"))
+            if (!GameManager.isBuilding)
             {
-                if (!isAttack)
+                if (Input.GetButton("Fire1"))
                 {
-                    //코루틴 실행
-                    StartCoroutine(AttackCoroutine()); //마우스 클릭하자마자 isAttack이 트루가 되어서 한번 클릭하면 다시 누르는걸 막아줌 ( 여러번 공격을 막기 위해)
+                    if (!isAttack)
+                    {
+                        //코루틴 실행
+                        StartCoroutine(AttackCoroutine()); //마우스 클릭하자마자 isAttack이 트루가 되어서 한번 클릭하면 다시 누르는걸 막아줌 ( 여러번 공격을 막기 위해)
+                    }
                 }
             }
         }

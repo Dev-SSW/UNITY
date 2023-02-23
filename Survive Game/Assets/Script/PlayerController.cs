@@ -14,6 +14,12 @@ public class PlayerController : MonoBehaviour
     private float jumpForce;
     [SerializeField]
     private float crouchSpeed;
+    [SerializeField]
+    private float swimSpeed;
+    [SerializeField]
+    private float swimFastSpeed;
+    [SerializeField]
+    private float upSwimSpeed;
 
     //상태 변수
     private bool isWalk = false;
@@ -73,9 +79,13 @@ public class PlayerController : MonoBehaviour
     {
         if (GameManager.canPlayerMove)
         {
+            WaterCheck();
             IsGround();
             TryJump();
-            TryRun();
+            if (!GameManager.isWater)
+            {
+                TryRun();
+            }
             TryCrouch();
             Move();
             CameraRotation();
@@ -88,6 +98,21 @@ public class PlayerController : MonoBehaviour
         {
             MoveCheck();
         }    
+    }
+
+    private void WaterCheck()
+    {
+        if (GameManager.isWater)
+        {
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                applySpeed = swimFastSpeed;
+            }
+            else
+            {
+                applySpeed = swimSpeed;
+            }
+        }
     }
     //앉기 시도
     private void TryCrouch()
@@ -154,10 +179,18 @@ public class PlayerController : MonoBehaviour
     //점프 시도
     private void TryJump()
     {
-        if(Input.GetKeyDown(KeyCode.Space) && isGround && theStatusController.GetCurrentSP() > 0)
+        if(Input.GetKeyDown(KeyCode.Space) && isGround && theStatusController.GetCurrentSP() > 0&&!GameManager.isWater)
         {
             Jump();
         }    
+        else if (Input.GetKey(KeyCode.Space) &&GameManager.isWater)
+        {
+            UpSwim();
+        }
+    }
+    private void UpSwim()
+    {
+        myRigid.velocity = transform.up * upSwimSpeed;
     }
     //점프
     private void Jump()
@@ -211,7 +244,7 @@ public class PlayerController : MonoBehaviour
         Vector3 _moveVertical = transform.forward * _moveDirZ;
 
         Vector3 _velocity = (_moveHorizontal + _moveVertical).normalized * applySpeed; //velocity 속도; 노멀라이즈를 통해 방향을 같에 해주는 것 뿐 (합이 1이 나오도록 정규화시켜주는거)
-        myRigid.MovePosition(transform.position + _velocity * Time.deltaTime);
+        myRigid.MovePosition(transform.position + _velocity * Time.fixedDeltaTime);
     }
 
     private void MoveCheck()

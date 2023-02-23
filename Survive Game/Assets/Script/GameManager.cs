@@ -9,11 +9,21 @@ public class GameManager : MonoBehaviour
     public static bool isOpenInventory = false; //인벤토리 활성화
 
     public static bool isOpenCraftManual = false; //건축메뉴창 활성화
+
+    public static bool isBuilding = false;
+
+    public static bool isNight = false;
+    public static bool isWater = false;
+
+    private WeaponManager theWM;
+    private bool flag = false;
+
     // Start is called before the first frame update
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        theWM = FindObjectOfType<WeaponManager>();
     }
 
     // Update is called once per frame
@@ -30,6 +40,24 @@ public class GameManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             canPlayerMove = true;
+        }
+
+        if (isWater)
+        {
+            if (flag == false)
+            {
+                StopAllCoroutines();
+                StartCoroutine(theWM.WeaponInCoroutine());
+                flag = true;
+            }
+        }
+        else
+        {
+            if (flag == true)
+            {
+                flag = false;
+                theWM.WeaponOut();
+            }
         }
     }
 }

@@ -23,20 +23,26 @@ public class SimpleTrap : MonoBehaviour
     {
         if (!isActivated)
         {
-            if (other.transform.tag != "Untagged")
+            if (other.transform.tag != null)
             {
-                isActivated = true;
-                theAudio.clip = sound_Activate;
-                theAudio.Play();
-                Destroy(go_Meat); //고기 제거
-                for (int i = 0; i < rigid.Length; i++)
+                if (other.transform.tag != "Untagged")
                 {
-                    rigid[i].useGravity = true;
-                    rigid[i].isKinematic = false;
-                }
-                if(other.transform.name == "Player")
-                {
-                    other.transform.GetComponent<StatusController>().DecreaseHP(damage);
+                    isActivated = true;
+                    theAudio.clip = sound_Activate;
+                    theAudio.Play();
+                    Destroy(go_Meat); //고기 제거
+                    for (int i = 0; i < rigid.Length; i++)
+                    {
+                        rigid[i].useGravity = true;
+                        rigid[i].isKinematic = false;
+                    }
+                    if (other.transform.name != null)
+                    {
+                        if (other.transform.name == "Player")
+                        {
+                            other.transform.GetComponent<StatusController>().DecreaseHP(damage);
+                        }
+                    }
                 }
             }
         }

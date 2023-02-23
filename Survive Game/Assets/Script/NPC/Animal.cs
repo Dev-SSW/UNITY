@@ -91,7 +91,7 @@ public class Animal : MonoBehaviour
 
         anim.SetBool("Walking", isWalking);
         anim.SetBool("Running", isRunning);
-        destination.Set(Random.Range(-0.2f , 0.2f),0f,Random.Range(0.5f,1f));
+        destination.Set(Random.Range(-0.2f , 0.2f),transform.position.y,Random.Range(0.5f,1f));
        
     }
 

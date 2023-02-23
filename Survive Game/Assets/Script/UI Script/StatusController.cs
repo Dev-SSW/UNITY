@@ -162,16 +162,16 @@ public class StatusController : MonoBehaviour
         if (currentsatisfy + _count < satisfy)
             currentsatisfy += _count;
         else
-            currentsp = sp;
+            currentsatisfy = satisfy;
     }
     public void DecreaseHP(int _count)
     {
-        if(currentdp > 0)
+        if(currenthp > 0)
         {
-            DecreaseDP(_count);
+            currenthp -= _count;
             return;
         }
-        currenthp -= _count;
+       
         if (currenthp <= 0)
             Debug.Log("캐릭터의 hp가 0이 되었습니다!");
     }

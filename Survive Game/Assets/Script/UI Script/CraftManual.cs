@@ -14,7 +14,8 @@ public class CraftManual : MonoBehaviour
 {
     //상태변수
     private bool isActivated = false;
-    private bool isPreviewActivated = false; 
+    private bool isPreviewActivated = false;
+    
     [SerializeField]
     private GameObject go_BaseUI; //기본 베이스 UI
 
@@ -37,7 +38,8 @@ public class CraftManual : MonoBehaviour
 
 
     public void SlotClick(int _slotNumber)
-    {     
+    {
+        GameManager.isBuilding = true;
         go_preview = Instantiate(craft_fire[_slotNumber].go_PreviewPrefab, tf_Player.position + tf_Player.forward, Quaternion.identity);
         go_Prefab = craft_fire[_slotNumber].go_Prefab;
         isPreviewActivated  = true;
@@ -60,7 +62,9 @@ public class CraftManual : MonoBehaviour
         }
         if (Input.GetButtonDown("Fire1"))
         {
+            
             Build();
+            
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -78,6 +82,7 @@ public class CraftManual : MonoBehaviour
             go_preview = null;
             go_Prefab = null;
             go_BaseUI.SetActive(false);
+            GameManager.isBuilding = false;
         }
     }
 
