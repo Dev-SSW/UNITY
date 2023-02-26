@@ -1,0 +1,1 @@
+{"playerPos":{"x":5.526356220245361,"y":-6.914601802825928,"z":4.3263068199157719},"PlayerRot":{"x":0.0,"y":302.0000305175781,"z":0.0},"invenArrayNumber":[10,13,16],"invenItemName":["SubMachineGun1","Rock","Potion Yellow"],"invenItemNumber":[1,5,1]}

@@ -59,6 +59,7 @@
     <Compile Include="Assets\Script\CloseWeapon.cs" />
     <Compile Include="Assets\Script\HandController.cs" />
     <Compile Include="Assets\Script\DayAndNight.cs" />
+    <Compile Include="Assets\Script\UI Script\PauseMenu.cs" />
     <Compile Include="Assets\Script\PreviewObject.cs" />
     <Compile Include="Assets\Script\CloseWeaponController.cs" />
     <Compile Include="Assets\Script\Item.cs" />
@@ -69,10 +70,12 @@
     <Compile Include="Assets\Script\UI Script\SlotToolTip.cs" />
     <Compile Include="Assets\Script\GunController.cs" />
     <Compile Include="Assets\Script\UI Script\CraftManual.cs" />
+    <Compile Include="Assets\Script\Water\Water.cs" />
     <Compile Include="Assets\Script\WeaponSway.cs" />
     <Compile Include="Assets\Script\NPC\FieldOfViewAngle.cs" />
     <Compile Include="Assets\Script\NPC\WeakAnimal.cs" />
     <Compile Include="Assets\Script\WeaponManager.cs" />
+    <Compile Include="Assets\Script\UI Script\Title.cs" />
     <Compile Include="Assets\Script\Gun.cs" />
     <Compile Include="Assets\Script\Crosshair.cs" />
     <Compile Include="Assets\Script\UI Script\DragSlot.cs" />
@@ -88,7 +91,7 @@
     <Compile Include="Assets\Script\ActionController.cs" />
     <Compile Include="Assets\Script\NPC\Animal.cs" />
     <Compile Include="Assets\Script\ItemPickUp.cs" />
-    <Compile Include="Assets\Script\Water\Water.cs" />
+    <Compile Include="Assets\Script\UI Script\SaveAndLoad.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -104,6 +107,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+    <None Include="Assets\Saves\SaveFile.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
