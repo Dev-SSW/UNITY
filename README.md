@@ -1,4 +1,4 @@
-# UNITY_NEW
+# UNITY
 
 유니티로 만든 서바이벌 게임
 
